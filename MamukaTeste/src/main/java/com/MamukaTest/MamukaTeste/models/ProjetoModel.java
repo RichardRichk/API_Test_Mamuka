@@ -13,7 +13,7 @@ import java.util.UUID;
 @Setter
 @Entity
 @Table(name = "tb_projeto")
-public class ProjetoModel extends UsuarioModel implements Serializable {
+public class ProjetoModel implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
 
@@ -26,10 +26,9 @@ public class ProjetoModel extends UsuarioModel implements Serializable {
     private String status;
     private LocalDate dataInicio;
     private LocalDate dataConclusao;
-    private UUID gestor;
 
-    @OneToOne
-    @JoinColumn(name = "id_gestor", referencedColumnName = "id_gestor")
-    private UsuarioModel usuario;
+    @OneToMany
+    @JoinColumn(name = "id_usuario", referencedColumnName = "id_usuario")
+    private UsuarioModel usuarios;
 
 }

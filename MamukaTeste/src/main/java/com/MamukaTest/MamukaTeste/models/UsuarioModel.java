@@ -14,7 +14,7 @@ import java.util.UUID;
 @Setter
 @Entity
 @Table(name = "tb_usuario")
-public class UsuarioModel extends TipoUsuarioModel implements Serializable {
+public class UsuarioModel implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
 
@@ -32,7 +32,6 @@ public class UsuarioModel extends TipoUsuarioModel implements Serializable {
     private String perfil;
     private String cargo;
     private String email;
-    private UUID id_tipoUsuario;
 
     @ManyToOne
     @JoinColumn(name = "id_tipoUsuario", referencedColumnName = "id_tipoUsuario")
