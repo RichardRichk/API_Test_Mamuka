@@ -3,7 +3,6 @@ package com.MamukaTest.MamukaTeste.controllers;
 import com.MamukaTest.MamukaTeste.Repositories.TipoUsuarioRepository;
 import com.MamukaTest.MamukaTeste.dtos.TipoUsuarioDto;
 import com.MamukaTest.MamukaTeste.models.TipoUsuarioModel;
-import com.MamukaTest.MamukaTeste.services.FileUploadServices;
 import jakarta.validation.Valid;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +18,6 @@ public class TipoUsuarioController {
 
     @Autowired
     TipoUsuarioRepository tipoUsuarioRepository;
-
-    @Autowired
-    FileUploadServices fileUploadServices;
 
     @GetMapping
     public ResponseEntity<List<TipoUsuarioModel>> listarTiposUsuario(){
