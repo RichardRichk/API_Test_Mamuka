@@ -4,9 +4,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.io.Serial;
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.util.Date;
 import java.util.UUID;
 
 @Getter
@@ -14,7 +13,7 @@ import java.util.UUID;
 @Entity
 @Table(name = "tb_projeto")
 public class ProjetoModel implements Serializable {
-    @Serial
+
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -22,13 +21,17 @@ public class ProjetoModel implements Serializable {
     @Column(name = "id", nullable = false)
     private UUID id;
 
-    private String nome;
-    private String status;
-    private LocalDate dataInicio;
-    private LocalDate dataConclusao;
+    @ManyToOne
+    @JoinColumn(name = "id_gestor", referencedColumnName = "id")
+    private UsuarioModel gestor ;
 
-    @OneToMany
-    @JoinColumn(name = "id_usuario", referencedColumnName = "id_usuario")
-    private UsuarioModel usuarios;
+    private String nome_projeto;
+    private String status_projeto;
+
+    @Temporal(TemporalType.DATE)
+    private Date data_inicio; // VERFICAR O TIPO DA VARIAVEL
+
+    @Temporal(TemporalType.DATE)
+    private Date data_conclusao; // VERFICAR O TIPO DA VARIAVEL
 
 }

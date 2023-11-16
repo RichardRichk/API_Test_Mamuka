@@ -16,35 +16,34 @@ public class TokenService {
     @Value("${api.security.token.secret}")
     private String secret;
 
-
     public String gerarToken(UsuarioModel usuario) {
         try {
             Algorithm algoritmo = Algorithm.HMAC256(secret);
 
             String token = JWT.create()
-                    .withIssuer("api-vsconnect")
+                    .withIssuer("api-mamuka")
                     .withSubject(usuario.getEmail())
-                    .withClaim("nomeUsuario", usuario.getNome())
+                    .withClaim("nomeUsuario", usuario.getNome()) // para enviar um Claim, procurar no material da materia, primeiro dia sobre o assunto dia 06 do 11
                     .withExpiresAt(gerarValidadeToken())
                     .sign(algoritmo);
+
             return token;
-        } catch (JWTCreationException exception) {
-            throw new RuntimeException("Erro na criacao do Token:", exception);
+        } catch(JWTCreationException exception) {
+            throw new RuntimeException("Erro na criação do token: ", exception);
         }
-
-
     }
 
     public String validarToken(String token) {
         try {
-
             Algorithm algoritmo = Algorithm.HMAC256(secret);
+
             return JWT.require(algoritmo)
                     .withIssuer("api-vsconnect")
                     .build()
                     .verify(token)
                     .getSubject();
-        } catch (JWTCreationException exception) {
+
+        } catch(JWTCreationException exception) {
             return "";
         }
     }
